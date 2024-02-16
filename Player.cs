@@ -9,7 +9,7 @@ public partial class Player : Area2D
 	public Vector2 ScreenSize;
 	public Vector2 Velocity = Vector2.Zero;
 	
-	private float _rotationAngle { get; set; } = 90 * MathF.PI / 180 ;
+	private float _rotationAngle { get; set; } = 90 * MathF.PI / 180;
 	private float _turnDirection;
 	private float _turnQueau;
 	
@@ -46,8 +46,5 @@ public partial class Player : Area2D
 			x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
 			y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
 		);
-		
 	}
-
-	
 }

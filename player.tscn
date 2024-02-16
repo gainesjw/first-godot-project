@@ -1,7 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl6d0u7rhoslc"]
+[gd_scene load_steps=8 format=3 uid="uid://dl6d0u7rhoslc"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_50ubn"]
+[ext_resource type="Script" path="res://Pellet.cs" id="1_ykxtb"]
 [ext_resource type="Texture2D" uid="uid://bu2xp6fbf1sts" path="res://images/SnakeBody.png" id="2_t2xkj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6tf1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_t2xkj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_isgcg"]
+radius = 3.0
+height = 6.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iwac8"]
 animations = [{
@@ -18,15 +34,30 @@ animations = [{
 radius = 101.0
 height = 202.0
 
-[node name="Player" type="Area2D"]
+[node name="Node" type="Node"]
+
+[node name="Pellet" type="Area2D" parent="."]
+position = Vector2(380, 637)
+script = ExtResource("1_ykxtb")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pellet"]
+position = Vector2(-0.0328237, 0.0218725)
+scale = Vector2(-0.0296595, 0.0301562)
+sprite_frames = SubResource("SpriteFrames_6tf1q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pellet"]
+shape = SubResource("CapsuleShape2D_isgcg")
+
+[node name="Player" type="Area2D" parent="."]
 position = Vector2(410, 632)
 script = ExtResource("1_50ubn")
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_iwac8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 scale = Vector2(0.1, 0.1)
 shape = SubResource("CapsuleShape2D_3vqqq")
