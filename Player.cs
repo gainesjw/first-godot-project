@@ -34,7 +34,7 @@ public partial class Player : Area2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{
+	{		
 		// Apply snake direction		
 		Rotation = _turnDirection * _rotationAngle;
 		Velocity.X = Speed * MathF.Cos(Rotation);
@@ -46,5 +46,16 @@ public partial class Player : Area2D
 			x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
 			y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
 		);
+		
+		// Snake tail move
+		/*foreach(Sprite2D bodyPart in _playerBodyContainer.GetChildren())
+		{
+			Vector2 temp = bodyPart.Position;
+			bodyPart.Position = new Vector2(
+			x: Mathf.Clamp(Position.X + 5, 0, ScreenSize.X),
+			y: Mathf.Clamp(Position.Y + 5, 0, ScreenSize.Y)
+			);
+		}*/
+		
 	}
 }

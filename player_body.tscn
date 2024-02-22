@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr7iyxq5uodf"]
+
+[ext_resource type="Texture2D" uid="uid://bu2xp6fbf1sts" path="res://images/SnakeBody.png" id="1_outb1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n2cf"]
+height = 20.0
+
+[node name="PlayerBody" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_outb1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7n2cf")
