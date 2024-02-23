@@ -35,12 +35,20 @@ public partial class World : Node2D
 			GetTree().Quit();
 		}
 		
+		// Check for body overlap
+		/*var Area2DList = player.GetOverlappingAreas();
+		foreach (Node2D overlappingArea in Area2DList)
+		{
+			GD.Print(overlappingArea);
+		}*/
+		
 		// Reset pellet if eaten
 		var pellet = GetNode<Pellet>("Pellet");
 		if(pellet.GetAlive() == 0)
 		{
 			RemoveChild(pellet);
 			
+			// Grow player
 			Area2D body = playerBody.Instantiate<Area2D>();
 			PlayerBody.Add(body);
 			AddChild(body);
@@ -48,21 +56,24 @@ public partial class World : Node2D
 			var random = new RandomNumberGenerator();
 			random.Randomize();
 			
-			var newX = random.RandiRange(0, (int)ScreenSize.X / 2);
-			var newY = random.RandiRange(0, (int)ScreenSize.Y / 2);
+			var newX = random.RandiRange(0, (int)ScreenSize.X / 4);
+			var newY = random.RandiRange(0, (int)ScreenSize.Y / 4);
 			
 			pellet.Position = new Vector2(newX, newY);
 			pellet.SetAlive(1);
 			
 			AddChild(pellet);
-			
-			Vector2 temp = player.Position;
-			foreach(Area2D bodyPart in PlayerBody)
-			{
-				Vector2 temp2 = bodyPart.Position;
-				bodyPart.Position = temp;
-				temp = temp2;
-			}
+		}
+		
+		// Move player tail
+		Vector2 temp = player.Position;
+		foreach(Area2D bodyPart in PlayerBody)
+		{
+			RemoveChild(bodyPart);
+			Vector2 temp2 = bodyPart.Position;
+			bodyPart.Position = new Vector2(temp.X, temp.Y);
+			temp = temp2;
+			AddChild(bodyPart);
 		}
 	}
 }

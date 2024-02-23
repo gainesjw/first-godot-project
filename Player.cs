@@ -5,7 +5,7 @@ public partial class Player : Area2D
 {
 	
 	[Export]
-	public int Speed { get; set; } = 100;	
+	public int Speed { get; set; } = 200;	
 	public Vector2 ScreenSize;
 	public Vector2 Velocity = Vector2.Zero;
 	
@@ -35,27 +35,16 @@ public partial class Player : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{		
-		// Apply snake direction		
+		// Apply player direction		
 		Rotation = _turnDirection * _rotationAngle;
 		Velocity.X = Speed * MathF.Cos(Rotation);
 		Velocity.Y = Speed * MathF.Sin(Rotation);
 		
-		// Snake movement
+		// player movement
 		Position += Velocity * (float)delta;
 		Position = new Vector2(
 			x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
 			y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
-		);
-		
-		// Snake tail move
-		/*foreach(Sprite2D bodyPart in _playerBodyContainer.GetChildren())
-		{
-			Vector2 temp = bodyPart.Position;
-			bodyPart.Position = new Vector2(
-			x: Mathf.Clamp(Position.X + 5, 0, ScreenSize.X),
-			y: Mathf.Clamp(Position.Y + 5, 0, ScreenSize.Y)
-			);
-		}*/
-		
+		);		
 	}
 }
